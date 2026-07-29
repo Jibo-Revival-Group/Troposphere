@@ -30,8 +30,7 @@ Troposphere will consist of multiple components , each of which will replace dif
 - - -
 # Instalation
 ## Method 1: Build it
-uhhh run 
-```sh make```
+uhhh ¯\_(ツ)_/¯
 on the root.. or idk
 
 ## Method 2: Get pre-built binaries from our site or the official Jibo Modding Tool
