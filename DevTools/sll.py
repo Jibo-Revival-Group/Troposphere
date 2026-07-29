@@ -11,51 +11,67 @@
 # <> -> Mini progress bar
 # l -> Log level
 
-DSGN_BLKLIST = ["-","X","<",">","L"]
 
-
-LOGGING_WHITESPACE = " "
-LOGGING_TAG = ""
-LOGGING_TEMPLATE = "[L--X---]l"
-
-DESIGN_LOG = ""
-
-
-def log_design_setup(tag=LOGGING_TAG, design=LOGGING_TEMPLATE, clr=LOGGING_WHITESPACE):
-    out=""
-    for char in design:
-        if char in DSGN_BLKLIST :
-            match char:
-                case "X":
-                    out += tag 
-                case _:
-                    out += clr
-        else:
-            out += char
-    return out
+class LogDesign():
     
+    #RESET
+    RESET = "\033[0m"
+    #GREEN
+    COLOR1= "\033[32m"
+    #YELLOW
+    COLOR2 = "\033[33m"
+    #RED
+    COLOR3 = "\033[31m"
 
+
+
+
+    template = "[L--X---]l"
+    whitepace = " "
+    iconChar = "[i]"
+
+    logChar = whitepace
+    warnChar = "W"
+    ErrorChar = "E"
+
+    logColor =  COLOR1
+    warnColor = COLOR2
+
+
+
+DSGN_BLKLIST = ["-","X","<",">","L"]
         
 
-def log(logValue,logLevel=1):
+def log(logValue,logLevel=1,DesignObject=LogDesign,ShowLogLevel=False):
     out = ""
-    for char in DESIGN_LOG:
+    for char in DesignObject.template:
         if char == "L":
-            out += LOGGING_WHITESPACE
+            out += DesignObject.logChar
         elif char == "l":
-            out += str(logLevel)
+            if ShowLogLevel: out += str(logLevel)
+            else: out += DesignObject.whitepace
         else:
-            out += char
-
+            if char == "-": out += DesignObject.whitepace
+            else: out += char
+    out = DesignObject.logColor + out + DesignObject.RESET
     print(out , logValue)
 
 
 
-DESIGN_LOG = log_design_setup()
-log("testing!")
 
-
-
+def warn(warnValue,warnLevel=1,DesignObject=LogDesign,ShowWarnLevel=False):
+    out = ""
+    for char in DesignObject.template:
+        if char == "W":
+            out += DesignObject.logChar
+        elif char == "l":
+            if ShowWarnLevel: out += str(warnLevel)
+            else: out += DesignObject.whitepace
+        else:
+            if char == "-": out += DesignObject.whitepace
+            else: out += char
+    out = DesignObject.warnColor + out + DesignObject.RESET
+    print(out , warnValue)
 
 
 
