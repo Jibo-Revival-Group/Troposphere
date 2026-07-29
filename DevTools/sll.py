@@ -14,7 +14,7 @@
 
 class LogDesign():
     
-    #RESET
+    #RESET 
     RESET = "\033[0m"
     #GREEN
     COLOR1= "\033[32m"
@@ -72,6 +72,8 @@ def warn(warnValue,warnLevel=1,DesignObject=LogDesign,ShowWarnLevel=False):
             else: out += char
     out = DesignObject.warnColor + out + DesignObject.RESET
     print(out , warnValue)
+
+
 
 
 
