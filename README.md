@@ -1,7 +1,7 @@
 # Troposphere-Jibo
 A Troposphere for jibos OS to run inside!
 - - -
-![[splash_0.png]]
+![Splash](https://github.com/Jibo-Revival-Group/Troposphere/blob/main/splash_0.png?raw=true)
 - - -
 ## What is troposphere really?
 Lets start by talking about what troposphere is not
