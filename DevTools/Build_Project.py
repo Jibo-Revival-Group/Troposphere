@@ -33,6 +33,10 @@ OUTPUT_DIR = create_dir_os(f"{SOURCE_DIR}/output")
 
 sll.log(f"Creating output dump -> {OUTPUT_DIR}")
 
+sll.log("Checking required source tree")
+
+
+
 
 
 
