@@ -1,0 +1,14 @@
+{
+	"nodes":[
+		{"id":"d3356cf33d2adf4b","x":-270,"y":-160,"width":170,"height":60,"type":"text","text":"Start compiling"},
+		{"id":"9499e7bd3972e410","x":-435,"y":40,"width":250,"height":60,"type":"text","text":"Fetch from config"},
+		{"id":"5d9eddcdd9aa0902","x":-185,"y":40,"width":250,"height":60,"type":"text","text":"Start questionnaire on what to include"},
+		{"id":"0f78f6240cc57aec","x":-310,"y":220,"width":250,"height":60,"type":"text","text":"Stage packages"}
+	],
+	"edges":[
+		{"id":"07f79b7584421b54","fromNode":"d3356cf33d2adf4b","fromSide":"bottom","toNode":"9499e7bd3972e410","toSide":"top"},
+		{"id":"28fd19de7f80697d","fromNode":"d3356cf33d2adf4b","fromSide":"bottom","toNode":"5d9eddcdd9aa0902","toSide":"top"},
+		{"id":"ba2c3a14858a0f49","fromNode":"9499e7bd3972e410","fromSide":"bottom","toNode":"0f78f6240cc57aec","toSide":"top"},
+		{"id":"e384c4e77327c84d","fromNode":"5d9eddcdd9aa0902","fromSide":"bottom","toNode":"0f78f6240cc57aec","toSide":"top"}
+	]
+}
