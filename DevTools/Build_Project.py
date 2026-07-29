@@ -28,12 +28,25 @@ def delete_dir(path):
 def file_exists(filepath: str | Path) -> bool:
     path = Path(filepath)
     return path.is_file()
+def copy_file(source: str | Path, destination: str | Path) -> Path:
+  
+    src_path = Path(source)
+    dst_path = Path(destination)
 
+    if not src_path.is_file():
+        raise FileNotFoundError(f"Source file does not exist: {src_path}")
+
+    # Ensure parent destination directory exists
+    if dst_path.is_dir() or not dst_path.suffix:
+        dst_path.mkdir(parents=True, exist_ok=True)
+
+    # shutil.copy2 preserves file metadata
+    copied_path = shutil.copy2(src_path, dst_path)
+    return Path(copied_path)
 def dir_exists(dirpath: str | Path) -> bool:
     path = Path(dirpath)
     return path.is_dir()
 def get_dir_size(folder_path: Path) -> int:
-    """Calculates the total size of all files inside a directory (in bytes)."""
     total_size = 0
     for file in folder_path.rglob("*"):
         if file.is_file():
@@ -97,6 +110,16 @@ def bundle_dualroot():
         bar = TreeLib.draw_progress_bar(100,20)
         sys.stdout.write(f"\r|-> Part 1 - Bundling filesystem {bar} -> Using pre bundled tarball")
         sys.stdout.flush()
+        TreeLib.execute_task_with_spinner(
+    "Copy pre bundled fs",
+    copy_file,  # Function reference without ()
+    f"{SOURCE_DIR}/include/dualrootfs.tar.gz",  # 1st argument
+    f"{OUTPUT_DIR}/dualrootfs.tar.gz",  # 2nd argument
+    indent=5,
+)
+ 
+
+
 
     else:
         dualroot = compress_directory(str(SOURCE_DIR)+"/include/dual_rootfs",str(OUTPUT_DIR)+"/dualrootfs.tar.gz",progress_callback=showBar)
