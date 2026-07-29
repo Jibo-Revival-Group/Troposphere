@@ -5,7 +5,7 @@
 # System General
 
 Include_Init_dir = False#Includes a Init configuration with pre set files... Can break some older versions
-Include_JiboPackageManager = True #Bundle Jibo package manager (Grabs from git)
+Include_JiboPackageManager = False#Bundle Jibo package manager (Grabs from git)
 Include_JiboBinaryWrappers = True #Bundle Wrappers for the jibo binaries inside the chroot
 
 Troposphere_Splash = "%/splash_0.png" #Set the Troposphere boot splash

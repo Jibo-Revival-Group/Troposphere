@@ -169,6 +169,8 @@ def compress_directory(
 
 
 # Install Functions
+def git_pull_jibo_wrappers():
+    sll.warn("func git_pull_jibo_wrappers NEEDS to be implemented!")
 
 
 def add_startup_command(command):
@@ -245,7 +247,7 @@ bundle_dualroot()
 sll.log("Continuing from BuildConfig ...")
 if BuildConfig.Include_Init_dir: copy_init_dir()
 if BuildConfig.Include_JiboPackageManager: git_pull_jpm()
-
+if BuildConfig.Include_JiboBinaryWrappers: git_pull_jibo_wrappers()
 
 
 
