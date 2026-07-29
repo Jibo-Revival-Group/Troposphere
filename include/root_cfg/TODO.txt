@@ -1,14 +1,4 @@
-/home/eva/Documents/Troposphere-Jibo/include/root/etc/fstab
-file:///home/eva/Documents/Troposphere-Jibo/include/root/etc/hostname
-file:///home/eva/Documents/Troposphere-Jibo/include/root/etc/hosts
-file:///home/eva/Documents/Troposphere-Jibo/include/root/etc/inittab
-file:///home/eva/Documents/Troposphere-Jibo/include/root/etc/os-release
-file:///home/eva/Documents/Troposphere-Jibo/include/root/etc/resolv.conf
-file:///home/eva/Documents/Troposphere-Jibo/include/root/etc/sensors3.conf
-file:///home/eva/Documents/Troposphere-Jibo/include/root/etc/shadow
-file:///home/eva/Documents/Troposphere-Jibo/include/root/etc/environment
-
-
+thats basically done
 
 
 make xterm in file:///home/eva/Documents/Troposphere-Jibo/include/root/etc/X11/xinit/xinitrc
