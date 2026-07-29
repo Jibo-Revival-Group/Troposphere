@@ -5,6 +5,7 @@ import os
 import shutil
 import TreeLib
 import tarfile
+import BuildConfig
 
 
 
@@ -141,7 +142,7 @@ sll.log(f"Creating output dump -> {OUTPUT_DIR}")
 sll.log("Checking required source tree")
 bundle_dualroot()
 
-
+sll.log("Grabbing Config")
 
 
 
