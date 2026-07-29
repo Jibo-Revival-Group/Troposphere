@@ -1,16 +1,16 @@
 {
 	"nodes":[
-		{"id":"f2cec444be1532db","x":540,"y":300,"width":400,"height":400,"type":"group","label":"/tmp/TroposphereInstaller/"},
-		{"id":"bc75ef9279a42a8f","x":-500,"y":-260,"width":300,"height":340,"type":"group","label":"Evaluate environment"},
-		{"id":"55a0547783783c33","x":-140,"y":-480,"width":250,"height":60,"type":"text","text":"Copy Build folder to a Flash drive or jibo via ssh"},
-		{"id":"203b6211c8dfe4b5","x":-126,"y":-360,"width":222,"height":60,"type":"text","text":"When Run `Install.sh`"},
-		{"id":"93a191de22b87b24","x":-480,"y":-240,"width":260,"height":60,"type":"text","text":"Check OS version "},
+		{"id":"f2cec444be1532db","type":"group","x":560,"y":-290,"width":400,"height":400,"label":"/tmp/TroposphereInstaller/"},
+		{"id":"bc75ef9279a42a8f","type":"group","x":-500,"y":-260,"width":300,"height":340,"label":"Evaluate environment"},
+		{"id":"55a0547783783c33","type":"text","text":"Copy Build folder to a Flash drive or jibo via ssh","x":-140,"y":-480,"width":250,"height":60},
+		{"id":"203b6211c8dfe4b5","type":"text","text":"When Run `Install.sh`","x":-126,"y":-360,"width":222,"height":60},
+		{"id":"93a191de22b87b24","type":"text","text":"Check OS version ","x":-480,"y":-240,"width":260,"height":60},
 		{"id":"1a4beeaa977d5ca8","type":"text","text":"Check for Jibo binaries","x":-480,"y":-180,"width":260,"height":60},
 		{"id":"d83468cf327c8822","type":"text","text":"Check r/w abillity","x":-480,"y":-120,"width":260,"height":60},
 		{"id":"1b550b7ece0193f9","type":"text","text":"Check free space on `/opt`","x":-480,"y":-60,"width":260,"height":60},
 		{"id":"f4af093245b7f146","type":"text","text":"Check for beam install","x":-480,"y":0,"width":260,"height":60},
-		{"id":"39fa4f3b43109004","x":-495,"y":200,"width":290,"height":60,"type":"text","text":"Kill everything except needed!"},
-		{"id":"1e72d4ff4b19b184","x":-187,"y":200,"width":344,"height":60,"type":"text","text":"New `/tmp/TroposphereInstaller/` dir"}
+		{"id":"39fa4f3b43109004","type":"text","text":"Kill everything except needed!","x":-495,"y":200,"width":290,"height":60},
+		{"id":"1e72d4ff4b19b184","type":"text","text":"New `/tmp/TroposphereInstaller/` dir","x":-187,"y":200,"width":344,"height":60}
 	],
 	"edges":[
 		{"id":"3e8e1dba3e4a4224","fromNode":"55a0547783783c33","fromSide":"bottom","toNode":"203b6211c8dfe4b5","toSide":"top"},

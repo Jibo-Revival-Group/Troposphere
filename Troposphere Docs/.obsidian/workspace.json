@@ -4,57 +4,39 @@
     "type": "split",
     "children": [
       {
-        "id": "f3f7cdad047f290d",
-        "type": "tabs",
-        "dimension": 63.32116788321168,
-        "children": [
-          {
-            "id": "a2a93d74ee80982f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "README.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "README"
-            }
-          },
-          {
-            "id": "878b5be6ac597d2a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "README.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "README"
-            }
-          }
-        ],
-        "currentTab": 1
-      },
-      {
         "id": "5e1a7bf533eac03f",
         "type": "tabs",
-        "dimension": 36.67883211678832,
         "children": [
           {
             "id": "f788dd98b6a9e8c2",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "Instalation.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Instalation"
+            }
+          },
+          {
+            "id": "8b7ead57476bdc90",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "To Do.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "To Do"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -216,12 +198,13 @@
       "bases:Create new base": false
     }
   },
-  "active": "f788dd98b6a9e8c2",
+  "active": "8b7ead57476bdc90",
   "lastOpenFiles": [
+    "Instalation.md",
+    "To Do.md",
+    "InstalationFlow.canvas",
     "README.md",
     "splash_0.png",
-    "InstalationFlow.canvas",
-    "Instalation.md",
     "Troposhphere.md"
   ]
 }
