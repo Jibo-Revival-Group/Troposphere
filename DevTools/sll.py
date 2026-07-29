@@ -26,7 +26,7 @@ class LogDesign():
 
 
 
-    template = "[L--X---]l"
+    template = "[L--i---]l"
     whitepace = " "
     iconChar = "[i]"
 
