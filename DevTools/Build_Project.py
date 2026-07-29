@@ -1,3 +1,4 @@
+from os.path import exists
 import sys
 import sll 
 from pathlib import Path
@@ -44,6 +45,17 @@ def copy_file(source: str | Path, destination: str | Path) -> Path:
     # shutil.copy2 preserves file metadata
     copied_path = shutil.copy2(src_path, dst_path)
     return Path(copied_path)
+def copy_folder(source_dir: str | Path, destination_dir: str | Path, overwrite=True):
+    src = Path(source_dir).resolve()
+    dst = Path(destination_dir).resolve()
+
+    if not src.exists():
+        sll.warn(f"Source directory for {src} doesnt exist")
+    if not src.is_dir():
+        sll.warn(f"Source path is not a directory {src}")
+
+    shutil.copytree(src,dst,dirs_exist_ok=overwrite)
+    return dst
 def dir_exists(dirpath: str | Path) -> bool:
     path = Path(dirpath)
     return path.is_dir()
@@ -101,6 +113,31 @@ def compress_directory(
 
     return output_path
 
+
+
+
+
+# Install Functions
+
+
+def copy_init_dir():
+    TreeLib.execute_task_with_spinner("Copying init directory", copy_folder, str(SOURCE_DIR) + "/include/root/etc/init.d", str(OUTPUT_DIR)+ "/root/etc/init.d", indent=5)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def bundle_dualroot():
     def showBar(percent: float):
         bar = TreeLib.draw_progress_bar(int(percent),20)
@@ -125,7 +162,7 @@ def bundle_dualroot():
     else:
         dualroot = compress_directory(str(SOURCE_DIR)+"/include/dual_rootfs",str(OUTPUT_DIR)+"/dualrootfs.tar.gz",progress_callback=showBar)
 
-
+    print("\n")
 
 sll.warn("Build Troposphere script... i hope everything goes well :/")
 
@@ -142,7 +179,8 @@ sll.log(f"Creating output dump -> {OUTPUT_DIR}")
 sll.log("Checking required source tree")
 bundle_dualroot()
 
-sll.log("Grabbing Config")
+sll.log("Continuing from BuildConfig ...")
+if BuildConfig.Include_Init_dir: copy_init_dir()
 
 
 
