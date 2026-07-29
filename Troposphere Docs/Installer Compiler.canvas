@@ -3,12 +3,22 @@
 		{"id":"d3356cf33d2adf4b","x":-270,"y":-160,"width":170,"height":60,"type":"text","text":"Start compiling"},
 		{"id":"9499e7bd3972e410","x":-435,"y":40,"width":250,"height":60,"type":"text","text":"Fetch from config"},
 		{"id":"5d9eddcdd9aa0902","x":-185,"y":40,"width":250,"height":60,"type":"text","text":"Start questionnaire on what to include"},
-		{"id":"0f78f6240cc57aec","x":-310,"y":220,"width":250,"height":60,"type":"text","text":"Stage packages"}
+		{"id":"0f78f6240cc57aec","x":-310,"y":220,"width":250,"height":60,"type":"text","text":"Stage packages"},
+		{"id":"d16eb58cab4b3310","x":-310,"y":-680,"width":250,"height":60,"type":"text","text":"Script"},
+		{"id":"92491452a538c1d8","x":-310,"y":-560,"width":250,"height":60,"type":"text","text":"Clear output folder"},
+		{"id":"81a2dcc51e105371","x":-310,"y":-460,"width":250,"height":60,"type":"text","text":"New Output"},
+		{"id":"a56e2dff6e955514","x":-311,"y":-332,"width":250,"height":60,"type":"text","text":"Copy dualroot into `/output/dualroot.tar.gz`"},
+		{"id":"e7fba7bf29006b47","x":-740,"y":-332,"width":250,"height":60,"type":"text","text":"Bundle dualroot if not bundled"}
 	],
 	"edges":[
 		{"id":"07f79b7584421b54","fromNode":"d3356cf33d2adf4b","fromSide":"bottom","toNode":"9499e7bd3972e410","toSide":"top"},
 		{"id":"28fd19de7f80697d","fromNode":"d3356cf33d2adf4b","fromSide":"bottom","toNode":"5d9eddcdd9aa0902","toSide":"top"},
 		{"id":"ba2c3a14858a0f49","fromNode":"9499e7bd3972e410","fromSide":"bottom","toNode":"0f78f6240cc57aec","toSide":"top"},
-		{"id":"e384c4e77327c84d","fromNode":"5d9eddcdd9aa0902","fromSide":"bottom","toNode":"0f78f6240cc57aec","toSide":"top"}
+		{"id":"e384c4e77327c84d","fromNode":"5d9eddcdd9aa0902","fromSide":"bottom","toNode":"0f78f6240cc57aec","toSide":"top"},
+		{"id":"8365728c3dac50ee","fromNode":"d16eb58cab4b3310","fromSide":"bottom","toNode":"92491452a538c1d8","toSide":"top"},
+		{"id":"fa2d7adb1c7c3822","fromNode":"92491452a538c1d8","fromSide":"bottom","toNode":"81a2dcc51e105371","toSide":"top"},
+		{"id":"d38f255124c915a6","fromNode":"81a2dcc51e105371","fromSide":"bottom","toNode":"a56e2dff6e955514","toSide":"top"},
+		{"id":"0d418fc8ed75c772","fromNode":"a56e2dff6e955514","fromSide":"bottom","toNode":"d3356cf33d2adf4b","toSide":"top"},
+		{"id":"0e2e2577cb582045","fromNode":"a56e2dff6e955514","fromSide":"left","toNode":"e7fba7bf29006b47","toSide":"right"}
 	]
 }
