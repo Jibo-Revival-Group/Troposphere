@@ -82,19 +82,25 @@ def file_exists(filepath: str | Path) -> bool:
     path = Path(filepath)
     return path.is_file()
 def copy_file(source: str | Path, destination: str | Path) -> Path:
-  
     src_path = Path(source)
     dst_path = Path(destination)
 
     if not src_path.is_file():
         raise FileNotFoundError(f"Source file does not exist: {src_path}")
 
-    # Ensure parent destination directory exists
-    if dst_path.is_dir() or not dst_path.suffix:
+    # If destination is an existing directory, or looks like a folder path (ends with / or has no suffix)
+    if dst_path.is_dir() or str(destination).endswith("/") or not dst_path.suffix:
+        # Create the directory
         dst_path.mkdir(parents=True, exist_ok=True)
+        # Append the filename to target inside that directory
+        dst_file_path = dst_path / src_path.name
+    else:
+        # If destination includes a target filename, ensure its parent directory exists
+        dst_path.parent.mkdir(parents=True, exist_ok=True)
+        dst_file_path = dst_path
 
     # shutil.copy2 preserves file metadata
-    copied_path = shutil.copy2(src_path, dst_path)
+    copied_path = shutil.copy2(src_path, dst_file_path)
     return Path(copied_path)
 def copy_folder(source_dir: str | Path, destination_dir: str | Path, overwrite=True):
     src = Path(source_dir).resolve()
@@ -193,7 +199,9 @@ def git_pull_jpm():
 
 
 
-
+def copy_fast_init():
+    for config in BuildConfig.Staged_Init_FBC:
+        TreeLib.execute_task_with_spinner(f"Copying Fast config : {config}", copy_file, str(SOURCE_DIR)+f"/include/root/etc/init.d/{config}",str(OUTPUT_DIR)+ "/root/etc/init.d/", indent=5)
 
 
 
@@ -248,6 +256,7 @@ sll.log("Continuing from BuildConfig ...")
 copy_init_dir() if BuildConfig.Include_Init_dir else sll.warn("Config : Not Including init dir replacement!")
 git_pull_jpm() if BuildConfig.Include_JiboPackageManager else sll.warn("Config : Not Including Jibo Package Manager!")
 git_pull_jibo_wrappers() if BuildConfig.Include_JiboBinaryWrappers else sll.warn("Config : Not Including Jibo Binary Wrappers!")
+TreeLib.execute_task_with_spinner("Copying Fast init configs",copy_fast_init,indent=10) if BuildConfig.Include_Faster_Boot_Configs else sll.warn("Config : Not Including Fast Boot Configs")
 
 
 
