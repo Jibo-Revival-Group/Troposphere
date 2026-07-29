@@ -1,0 +1,66 @@
+#!/bin/sh
+
+# Start all init scripts in /etc/init.d
+# executing them in numerical order with parallelization where safe.
+
+# Services that must run sequentially (have dependencies)
+SEQUENTIAL="S00fix-os S09wifi-enable S18udev S45network S48avahi-daemon S63body-board-power S54modules"
+
+# Track background processes
+PIDS=""
+
+# Function to wait for background processes
+wait_for_background() {
+    for pid in $PIDS; do
+        wait $pid 2>/dev/null
+    done
+    PIDS=""
+}
+
+for i in /etc/init.d/S??* ;do
+    # Ignore dangling symlinks (if any).
+    [ ! -f "$i" ] && continue
+
+    # Extract script name for dependency checking
+    SCRIPT_NAME=$(basename "$i")
+
+    # Check if this script must run sequentially
+    SEQUENTIAL_RUN=0
+    for seq in $SEQUENTIAL; do
+        if [ "$SCRIPT_NAME" = "$seq" ]; then
+            SEQUENTIAL_RUN=1
+            break
+        fi
+    done
+
+    # Wait for background processes before running sequential scripts
+    if [ "$SEQUENTIAL_RUN" = "1" ]; then
+        wait_for_background
+    fi
+
+    case "$i" in
+	*.sh)
+	    # Source shell script for speed.
+	    (
+		trap - INT QUIT TSTP
+		set start
+		. $i
+	    )
+	    ;;
+	*)
+	    # No sh extension, so fork subprocess.
+	    if [ "$SEQUENTIAL_RUN" = "1" ]; then
+	        # Run sequentially
+	        $i start
+	    else
+	        # Run in background
+	        $i start &
+	        PIDS="$PIDS $!"
+	    fi
+	    ;;
+    esac
+done
+
+# Wait for any remaining background processes
+wait_for_background
+

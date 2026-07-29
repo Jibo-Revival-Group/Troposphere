@@ -1,0 +1,30 @@
+/home/eva/Documents/Troposphere-Jibo/include/root/etc/fstab
+file:///home/eva/Documents/Troposphere-Jibo/include/root/etc/hostname
+file:///home/eva/Documents/Troposphere-Jibo/include/root/etc/hosts
+file:///home/eva/Documents/Troposphere-Jibo/include/root/etc/inittab
+file:///home/eva/Documents/Troposphere-Jibo/include/root/etc/os-release
+file:///home/eva/Documents/Troposphere-Jibo/include/root/etc/resolv.conf
+file:///home/eva/Documents/Troposphere-Jibo/include/root/etc/sensors3.conf
+file:///home/eva/Documents/Troposphere-Jibo/include/root/etc/shadow
+file:///home/eva/Documents/Troposphere-Jibo/include/root/etc/environment
+
+
+
+
+make xterm in file:///home/eva/Documents/Troposphere-Jibo/include/root/etc/X11/xinit/xinitrc
+
+for term:
+No Scroll bar
+55x150
+(+5 char size)
+
+printf "\e]50;#+5\a" > /dev/pts/0
+
+
+
+
+
+
+------ Setup Virtual environment
+wifi
+mount --bind /etc/resolv.conf /opt/test/dual_rootfs/etc/resolv.conf

@@ -1,0 +1,45 @@
+#### Configure for dhcp
+# Current strategy where it automatically selects an IP address using dhcp.
+
+# Alternate strategy where you select an IP address. To do this,
+# comment out the above statement for dhcp, uncomment out the below
+# statement, and set XXX to be a number 3-253. The IP you can connect to
+# will be 192.168.1.XXX where XXX is the number you just set.
+
+#### Configure ifi WiFi static address
+#auto wlp1s0
+#iface wlp1s0 inet static
+#  address 10.10.1.XXX
+#  network 10.10.1.1
+#  netmask 255.255.255.0
+#  broadcast 10.10.1.255
+#  gateway 10.10.1.1
+#  dns-nameservers 206.67.222.222 206.67.220.220
+#        pre-up wpa_supplicant -B -i wlp1s0 -c /var/etc/wpa_supplicant.conf
+#        post-down killall -q wpa-supplicant
+
+auto lo
+iface lo inet loopback
+
+# This is also hard coded in the *70* udev rule
+# Configure eth0 static IP
+auto eth0
+iface eth0 inet static
+	address 172.24.84.101
+	network 172.24.84.0
+	netmask 255.255.255.0
+	broadcast 172.24.84.255
+
+# For EVT and DVT (intel wifi)
+auto wlp1s0
+iface wlp1s0 inet dhcp
+	post-up wpa_supplicant -B -i wlp1s0 -c /var/etc/wpa_supplicant.conf
+	pre-down wpa_cli -i wlan0 terminate
+	udhcpc_opts -R -b -t 3 -T 5 -A 5
+
+# For DVT2/PVT (TI wifi)
+auto wlan0
+iface wlan0 inet dhcp
+	post-up wireless-startup
+	pre-down wpa_cli -i wlan0 terminate
+	udhcpc_opts -R -b -t 3 -T 5 -A 5
