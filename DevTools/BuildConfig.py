@@ -4,7 +4,7 @@
 
 # System General
 
-Include_Init_dir = False #Includes a Init configuration with pre set files... Can break some older versions
+Include_Init_dir = False#Includes a Init configuration with pre set files... Can break some older versions
 Include_JiboPackageManager = True #Bundle Jibo package manager (Grabs from git)
 Include_JiboBinaryWrappers = True #Bundle Wrappers for the jibo binaries inside the chroot
 

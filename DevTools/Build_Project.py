@@ -7,11 +7,62 @@ import shutil
 import TreeLib
 import tarfile
 import BuildConfig
-
-
+import git
+from git import RemoteProgress
+import urllib.request
 
 SOURCE_DIR = ""
 OUTPUT_DIR = ""
+class GitProgressHandler(RemoteProgress):
+    def __init__(self, callback_fn):
+        super().__init__()
+        self.callback_fn = callback_fn
+    def update(self, op_code, cur_count, max_count=None, message=""):
+        if max_count:
+            percentage = (cur_count / max_count) * 100.0
+            self.callback_fn(percentage)
+def clone_repo(url: str, target_dir: str| Path, progress_callback=None):
+    target = Path(target_dir).resolve()
+    progress_handler = (GitProgressHandler(progress_callback) if progress_callback else None)
+
+    git.Repo.clone_from(url,target_dir,progress=progress_handler)
+    return target
+def download_file(url: str, target_path: str | Path, progress_callback=None):
+    """Downloads a file from a URL to target_path while reporting percentage
+
+    progress to progress_callback.
+    """
+    target = Path(target_path).resolve()
+    target.parent.mkdir(parents=True, exist_ok=True)
+
+    # Open connection to read headers and file size
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+
+    with urllib.request.urlopen(req) as response:
+        # Get total size from headers (Content-Length)
+        total_bytes = int(response.headers.get("Content-Length", 0))
+        downloaded_bytes = 0
+        chunk_size = 8192  # Download in 8 KB chunks
+
+        with open(target, "wb") as f:
+            while True:
+                chunk = response.read(chunk_size)
+                if not chunk:
+                    break
+
+                f.write(chunk)
+                downloaded_bytes += len(chunk)
+
+                # Send percentage to progress callback if total size is known
+                if progress_callback and total_bytes > 0:
+                    percent = (downloaded_bytes / total_bytes) * 100.0
+                    progress_callback(min(percent, 100.0))
+
+    # Force 100% completion update when finished
+    if progress_callback:
+        progress_callback(100.0)
+
+    return target
 
 def get_parent_dir():
     script_dir = Path(__file__).resolve().parent
@@ -120,11 +171,23 @@ def compress_directory(
 # Install Functions
 
 
+def add_startup_command(command):
+    sll.warn("func add_startup_command NEEDS to be implemented!")
+
+
+
 def copy_init_dir():
     TreeLib.execute_task_with_spinner("Copying init directory", copy_folder, str(SOURCE_DIR) + "/include/root/etc/init.d", str(OUTPUT_DIR)+ "/root/etc/init.d", indent=5)
 
 
 
+def git_pull_jpm():
+    def showBar(percent: float):
+        bar = TreeLib.draw_progress_bar(int(percent),20)
+        sys.stdout.write(f"\r|-> Cloning Jibo Package Manager {bar}")
+        sys.stdout.flush()
+    
+    clone_repo("https://github.com/Jibo-Revival-Group/Jibo-bins.git",str(OUTPUT_DIR)+"/git", progress_callback=showBar)
 
 
 
@@ -181,7 +244,7 @@ bundle_dualroot()
 
 sll.log("Continuing from BuildConfig ...")
 if BuildConfig.Include_Init_dir: copy_init_dir()
-
+if BuildConfig.Include_JiboPackageManager: git_pull_jpm()
 
 
 
