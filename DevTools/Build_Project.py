@@ -99,7 +99,7 @@ def bundle_dualroot():
         sys.stdout.flush()
 
     else:
-        dualroot = compress_directory(str(SOURCE_DIR)+"/include/dual_rootfs",str(OUTPUT_DIR)+"dualrootfs.tar.gz",progress_callback=showBar)
+        dualroot = compress_directory(str(SOURCE_DIR)+"/include/dual_rootfs",str(OUTPUT_DIR)+"/dualrootfs.tar.gz",progress_callback=showBar)
 
 
 
