@@ -1,0 +1,20 @@
+# Cross compiler prefix
+CROSS_COMPILE ?= arm-none-linux-gnueabihf-
+CC            := $(CROSS_COMPILE)gcc
+
+# Fallback CFLAGS and LIBS if pkg-config cross-wrapper is missing
+CFLAGS        := -Wall -Wextra -O3
+LIBS          := -lSDL2 -lSDL2_image
+
+TARGET        := viewer_tegra
+SRC           := main.c
+
+.PHONY: all clean
+
+all: $(TARGET)
+
+$(TARGET): $(SRC)
+	$(CC) $(CFLAGS) $< -o $@ $(LIBS)
+
+clean:
+	rm -f $(TARGET)

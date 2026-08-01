@@ -2,6 +2,7 @@
 #include <SDL2/SDL_image.h>
 #include <stdio.h>
 
+void show_boot_splash(SDL_Renderer* renderer, SDL_Texture* texture);
 
 int main(int argc, char *argv[])
 {
@@ -77,8 +78,10 @@ int main(int argc, char *argv[])
     SDL_SetRenderDrawColor(renderer, 0,0,0,255);
     SDL_RenderClear(renderer);
 
-    SDL_RenderCopy(renderer,BootSplash_Texture,NULL,NULL);
+    show_boot_splash(renderer, BootSplash_Texture);
     SDL_RenderPresent(renderer);
+
+     
 
 
 
@@ -98,4 +101,23 @@ int main(int argc, char *argv[])
     SDL_Quit();
 
   return EXIT_SUCCESS;
+}
+
+
+void show_boot_splash( SDL_Renderer* renderer , SDL_Texture* texture){
+
+  if (!texture){
+
+    SDL_SetRenderDrawColor(renderer, 0,50,0,50);
+    SDL_RenderClear(renderer);
+
+  } else {
+
+    SDL_RenderCopy(renderer, texture, NULL,NULL);
+
+  }
+
+
+ SDL_RenderCopy(renderer,texture, NULL, NULL);
+
 }
