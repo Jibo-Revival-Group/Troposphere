@@ -62,14 +62,30 @@ def log(logValue,logLevel=1,DesignObject=LogDesign,ShowLogLevel=False):
 def warn(warnValue,warnLevel=1,DesignObject=LogDesign,ShowWarnLevel=False):
     out = ""
     for char in DesignObject.template:
-        if char == "W":
-            out += DesignObject.logChar
-        elif char == "l":
-            if ShowWarnLevel: out += str(warnLevel)
-            else: out += DesignObject.whitepace
-        else:
-            if char == "-": out += DesignObject.whitepace
-            else: out += char
+        
+        match char:
+            case "L":
+                out += DesignObject.warnChar
+            case "l":
+                if ShowWarnLevel:out += str(warnLevel)
+                else:out += DesignObject.whitepace
+            case "-":
+                out += DesignObject.whitepace
+            
+            case _:
+                out += char
+
+
+
+
+        # if char == "W":
+        #     out += DesignObject.logChar
+        # elif char == "l":
+        #     if ShowWarnLevel: out += str(warnLevel)
+        #     else: out += DesignObject.whitepace
+        # else:
+        #     if char == "-": out += DesignObject.whitepace
+        #     else: out += char
     out = DesignObject.warnColor + out + DesignObject.RESET
     print(out , warnValue)
 
