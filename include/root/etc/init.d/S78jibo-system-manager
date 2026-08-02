@@ -34,7 +34,7 @@ check_mode() {
 }
 
 check_running() {
-    pgrep -x jibo-system-man >& /dev/null
+    pgrep -f "$BIN_DIR/$PROCESS" > /dev/null 2>&1
     return $?
 }
 
@@ -46,8 +46,12 @@ wait_for_stopped() {
 }
 
 start() {
-    echo -n "Starting $PROCESS: "
     check_mode
+    if check_running; then
+        echo "jibo-system-manager is ALREADY RUNNING (PID: $(pgrep -f "$BIN_DIR/$PROCESS"))"
+        return 0
+    fi
+    echo -n "Starting $PROCESS: "
     $BIN_DIR/$PROCESS -c $CFG_DIR/$PROCESS.json --daemon
     test $? -eq 0 && echo "OK" || echo "ERROR"
 }
