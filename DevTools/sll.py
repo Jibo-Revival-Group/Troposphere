@@ -26,9 +26,9 @@ class LogDesign():
 
 
 
-    template = "[L--i---]l"
+    template = "[L--X---]l"
     whitepace = " "
-    iconChar = "[i]"
+    iconChar = "i"
 
     logChar = whitepace
     warnChar = "W"
@@ -43,18 +43,24 @@ DSGN_BLKLIST = ["-","X","<",">","L"]
         
 
 def log(logValue,logLevel=1,DesignObject=LogDesign,ShowLogLevel=False):
-    out = ""
-    for char in DesignObject.template:
-        if char == "L":
-            out += DesignObject.logChar
-        elif char == "l":
-            if ShowLogLevel: out += str(logLevel)
-            else: out += DesignObject.whitepace
-        else:
-            if char == "-": out += DesignObject.whitepace
-            else: out += char
-    out = DesignObject.logColor + out + DesignObject.RESET
-    print(out , logValue)
+       out = ""
+       for char in DesignObject.template:
+           
+           match char:
+               case "L":
+                   out += DesignObject.logChar
+               case "l":
+                   if ShowLogLevel: out += str(logLevel)
+                   else:out += DesignObject.whitepace
+               case "-":
+                   out += DesignObject.whitepace
+               case "X":
+                   out += DesignObject.iconChar
+               case _:
+                   out += char
+
+       out = DesignObject.logColor + out + DesignObject.RESET
+       print(out , logValue)
 
 
 
@@ -71,7 +77,8 @@ def warn(warnValue,warnLevel=1,DesignObject=LogDesign,ShowWarnLevel=False):
                 else:out += DesignObject.whitepace
             case "-":
                 out += DesignObject.whitepace
-            
+            case "X":
+                out += DesignObject.iconChar
             case _:
                 out += char
 
@@ -87,7 +94,7 @@ def warn(warnValue,warnLevel=1,DesignObject=LogDesign,ShowWarnLevel=False):
 
 
 
-def err(warnValue,warnLevel=1,DesignObject=LogDesign,ShowWarnLevel=False):
+def err(warnValue,DesignObject=LogDesign):
     out = ""
     for char in DesignObject.template:
         
@@ -95,10 +102,11 @@ def err(warnValue,warnLevel=1,DesignObject=LogDesign,ShowWarnLevel=False):
             case "L":
                 out += DesignObject.errorChar
             case "l":
-                if ShowWarnLevel:out += str(warnLevel)
-                else:out += DesignObject.whitepace
+                out += DesignObject.whitepace
             case "-":
                 out += DesignObject.whitepace
+            case "X":
+                out += DesignObject.iconChar
             case _:
                 out += char
 
