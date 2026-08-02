@@ -32,11 +32,11 @@ class LogDesign():
 
     logChar = whitepace
     warnChar = "W"
-    ErrorChar = "E"
+    errorChar = "E"
 
     logColor =  COLOR1
     warnColor = COLOR2
-
+    errorColor = COLOR3
 
 
 DSGN_BLKLIST = ["-","X","<",">","L"]
@@ -76,16 +76,6 @@ def warn(warnValue,warnLevel=1,DesignObject=LogDesign,ShowWarnLevel=False):
                 out += char
 
 
-
-
-        # if char == "W":
-        #     out += DesignObject.logChar
-        # elif char == "l":
-        #     if ShowWarnLevel: out += str(warnLevel)
-        #     else: out += DesignObject.whitepace
-        # else:
-        #     if char == "-": out += DesignObject.whitepace
-        #     else: out += char
     out = DesignObject.warnColor + out + DesignObject.RESET
     print(out , warnValue)
 
@@ -96,5 +86,24 @@ def warn(warnValue,warnLevel=1,DesignObject=LogDesign,ShowWarnLevel=False):
 
 
 
+
+def err(warnValue,warnLevel=1,DesignObject=LogDesign,ShowWarnLevel=False):
+    out = ""
+    for char in DesignObject.template:
+        
+        match char:
+            case "L":
+                out += DesignObject.errorChar
+            case "l":
+                if ShowWarnLevel:out += str(warnLevel)
+                else:out += DesignObject.whitepace
+            case "-":
+                out += DesignObject.whitepace
+            case _:
+                out += char
+
+
+    out = DesignObject.errorColor + out + DesignObject.RESET
+    print(out , warnValue)
 
 
