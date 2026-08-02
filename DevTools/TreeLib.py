@@ -19,7 +19,7 @@ def execute_task_with_spinner(label, task_fn, *args, indent=0, **kwargs):
     Executes task_fn(*args, **kwargs) in a background thread while displaying an
     animated spinner or progress updates next to the label.
     """
-    prefix = " " * indent + "|-> " if indent > 0 else ""
+    prefix = " " * indent + " ╰──> " if indent > 0 else ""
     full_prefix = f"{prefix}{label} "
 
     with ThreadPoolExecutor(max_workers=1) as executor:
